@@ -1,5 +1,5 @@
 /* https://poolors.com/8d92a6-030203-702c73-fbfbfb */
-#formatIndicator, #characterEntry, #addButton{
+#formatIndicator, #characterEntry, #addButton, #trash{
     background-color: #702c73;
     color: #fbfbfb;
     border: #030203 2px solid;
@@ -8,15 +8,26 @@
     padding:0.2em;
 }
 
+#characterEntry{
+    line-height: 1.3em;
+}
+
 #addButton{
     background-color: #8d92a6;
     color: #030203;
     font-weight: bolder;
 }
 
+#trash{
+    background-color: #030203;
+    color: #fbfbfb;
+    font-weight: bolder;
+}
+
 input{
     background-color: #8d92a6;
     color: #030203;
+    width:fit-content;
 }
 
 html{
