@@ -6,8 +6,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
     <body>
-        <p id="formatIndicator">Character Entry<br>Name | Dex Mod | Other Initiative Mods (input sum excluding dex)</p>
+        <p id="formatIndicator">Enter your characters and NPCs. The order here does not matter.<br>Name | Dex Mod | Non-Dex Mods</p>
+        <p id="appendedInfo">The player with the higher dex mod is granted a better initiative slot if rolls turn out the same. If those are equal than it is random.</p>
         <div id="characterEntry"></div>
+        <button id="rollButton">Roll Initiative</button>
+        <div id="resultDiv">
+            <p>Current Initiative: </p>
+        </div>
         <script src="script.js"></script>
     </body>
 </html>

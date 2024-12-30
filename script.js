@@ -1,4 +1,5 @@
 charDiv = document.getElementById("characterEntry");
+outDiv = document.getElementById("resultDiv")
 
 charTemplate = document.createElement("div")
 charTemplate.classList.add("character")
@@ -49,7 +50,7 @@ function addChar(){
         let index = Array.from(charDiv.children).indexOf(clone);
         modifyProperty(index, Number(event.target.value), "mod")
     })
-    clone.childNodes[3].addEventListener("click", (event) => {
+    clone.childNodes[3].addEventListener("click", () => {
         let index = Array.from(charDiv.children).indexOf(clone);
         removeChar(index)
     })
@@ -61,3 +62,30 @@ plusButton.textContent = "+"
 plusButton.id = "addButton"
 plusButton.addEventListener("click", addChar)
 charDiv.appendChild(plusButton)
+
+function output(){
+    let rolls = []
+    for (let char of chars){
+        let roll = Math.max(Math.round(Math.random()*20 + (char.dex + char.mod)), 1)
+        rolls.push([char.name, roll, char.dex])
+    }
+    rolls.sort((a, b) => {
+        if (a[1] !== b[1]){
+            return a[1] < b[1] ? 1 : -1
+        }else if (a[2] !== b[2]){
+            return a[2] < b[2] ? 1 : -1
+        }else{
+            return Math.random() <= 0.5 ? 1 : -1
+        }
+    })
+    outDiv.innerHTML = "Current Initiative:"
+    for (let roll of rolls){
+        rollElem = document.createElement("div")
+        rollElem.classList.add("roll")
+        rollElem.innerHTML = `${rolls.indexOf(roll) + 1}. ${roll[0]} (${roll[1]})`
+        outDiv.appendChild(rollElem)
+    }
+}
+
+rollButton = document.getElementById("rollButton")
+rollButton.addEventListener("click", output)
