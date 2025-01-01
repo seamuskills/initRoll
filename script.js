@@ -55,6 +55,7 @@ function addChar(){
         removeChar(index)
     })
     charDiv.insertBefore(clone, plusButton)
+    return clone
 }
 
 plusButton = document.createElement("button")
@@ -87,5 +88,53 @@ function output(){
     }
 }
 
+function importJSON(){
+    let fileImport = document.createElement("input")
+    fileImport.type = "file"
+    fileImport.click()
+    fileImport.addEventListener("change", () => {
+        let textPromise = fileImport.files[0].text()
+        textPromise.then((result) => {parseJSON(result)})
+    })
+}
+
+function parseJSON(string){
+    let json
+    try {
+        json = JSON.parse(string)
+    }catch(e){
+        alert("Invalid json file provided!")
+        return
+    }
+    let charsIndex = chars.length
+    for (let i = 0; i < json.length; i++) {
+        let elem = addChar()
+        chars[charsIndex + i].name = json[i].name
+        elem.childNodes[0].value = json[i].name
+        chars[charsIndex + i].dex = json[i].dex
+        elem.childNodes[1].value = json[i].dex
+        chars[charsIndex + i].mode = json[i].mod
+        elem.childNodes[2].value = json[i].mod
+    }
+}
+
+function exportJSON(){
+    let json = JSON.stringify(chars)
+    let blob = new Blob([json], { type: "application/json" })
+
+    let url = window.URL
+    let link = url.createObjectURL(blob)
+    let a = document.createElement("a")
+    a.href = link
+    a.download = "party.json"
+    a.click()
+}
+
 rollButton = document.getElementById("rollButton")
 rollButton.addEventListener("click", output)
+
+uploadButton = document.getElementById("upload")
+uploadButton.addEventListener("click", importJSON)
+
+downloadButton = document.getElementById("download")
+downloadButton.addEventListener("click", exportJSON)

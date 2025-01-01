@@ -1,5 +1,5 @@
 /* https://poolors.com/8d92a6-030203-702c73-fbfbfb */
-#formatIndicator, #characterEntry, #addButton, #trash, #resultDiv, #rollButton{
+#formatIndicator, #characterEntry, #addButton, #trash, #resultDiv, #rollButton, #upload, #download{
     background-color: #702c73;
     color: #fbfbfb;
     border: #030203 2px solid;
